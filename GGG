@@ -1,0 +1,43 @@
+import pyautogui
+import time
+import keyboard  # You need to install this: pip install keyboard
+
+# Load image file paths
+cookie_img = 'images/cookie.png'
+buildings = [
+    'images/cursor.png',
+    'images/grandma.png',
+    'images/farm.png',
+    'images/mine.png'
+]
+
+# Try to find the cookie on screen
+try:
+    cookie_x, cookie_y = pyautogui.locateCenterOnScreen(cookie_img, confidence=0.8)
+except:
+    print("Cookie image not found on screen.")
+    exit()
+
+# Click loop
+print("Bot started. Press ESC to stop.")
+while True:
+    if keyboard.is_pressed('esc'):
+        print("Bot stopped.")
+        break
+
+    # Click the big cookie
+    pyautogui.click(cookie_x, cookie_y)
+
+    # Try to buy each building up to 20 times
+    for building in buildings:
+        try:
+            bx, by = pyautogui.locateCenterOnScreen(building, confidence=0.8)
+            for _ in range(20):
+                pyautogui.click(bx, by)
+                time.sleep(0.05)
+        except:
+            pass
+
+    # Wait a bit before next round
+    time.sleep(0.1)
+)
