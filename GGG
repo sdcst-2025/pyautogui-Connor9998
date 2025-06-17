@@ -7,8 +7,7 @@ buys = 5
 itemlimit = {
     'cursor.png': 20,
     'grandma.png': 15,
-    'farm.png': 10,
-    'mine.png': 8,
+    'Untitled.png': 10,
     'factory.png': 5,
     'bank.png': 3,
     'temple.png': 2,
