@@ -34,15 +34,20 @@ def clickcookieandbuy():
 
 def buyitemswithlimits():
     for image, limit in itemlimit.items():
-        count = countonscreen(image)
-        if count < limit:
-            location = pyautogui.locateCenterOnScreen(image, confidence=0.8)
-            if location:
-                pyautogui.click(location)
-                print(f"Bought: {image} (currently: {count})")
-                time.sleep(0.2)
-        else:
-            print(f"Skipped {image} (already have {count})")
+        try:
+            count = countonscreen(image)
+            if count < limit:
+                location = pyautogui.locateCenterOnScreen(image, confidence=0.8)
+                if location:
+                    pyautogui.click(location)
+                    print(f"Bought: {image} (currently: {count})")
+                    time.sleep(0.2)
+                else:
+                    print(f"{image} not found on screen.")
+            else:
+                print(f"Skipped {image} (already have {count})")
+        except Exception as e:
+            print(f"Error buying {image}: {e}")
 
 def countonscreen(imagefile):
     matches = list(pyautogui.locateAllOnScreen(imagefile, confidence=0.8))
